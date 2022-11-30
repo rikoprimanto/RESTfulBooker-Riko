@@ -30,7 +30,7 @@ RESTfulBooker - Auth Token
     Auth Token
 RESTfulBooker - Get All BookingIDs
     Get All BookingIDs
-RESTfulBooker - Get All BookingIDs - Create Booking
+RESTfulBooker - Create Booking
     Create Booking
-RESTfulBooker - Get All BookingIDs - Update Booking
+RESTfulBooker - Update Booking
     Update Booking
