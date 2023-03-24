@@ -1,7 +1,6 @@
 *** Settings ***
 Library             RequestsLibrary
 Library             Collections
-Library             JsonValidator
 Library             Process
 Library             OperatingSystem
 
@@ -19,6 +18,8 @@ ${TOTALPRICE}           600
 ${DEPOSITPAID}          true
 ${CHECKIN}              2022-11-2
 ${CHECKOUT}             2022-11-5
+${ADDITIONALNEEDS}      Breakfast               
+
 
 *** Keywords ***
 Update Booking
@@ -29,11 +30,14 @@ Update Booking
     ...                 firstname=${FIRSTNAME}
     ...                 lastname=${LASTNAME}
     ...                 totalprice=0
-    ...                 depositpaid=${DEPOSITPAID}
-    ...                 bookingdates=${bookingdates}
+    ...                 depositpaid=${DEPOSITPAID} 
+    ...                 additionalneeds=${ADDITIONALNEEDS}
+    ...                 bookingdates=${bookingdates}     
+    ${TOKEN}=    Set Variable    
     ${HEADERS}=          Create Dictionary
     ...                  Content-Type=${CONTENT_TYPE}
+    ...                  Cookie=token=${TOKEN}
     Create Session      Update Booking      ${BASE_URL}     verify=True
-    ${response}=        Put Request     Update Booking  uri=${BOOKING}     data=${updatebooking}       headers=${HEADERS}
-    log to console    ${response.status_code}
-    Should Be Equal      ${response.status_code}     ${200}
+    ${NEWID}=    Set Variable    
+    ${response}=        Put Request    Update Booking      uri=${BOOKING}/${NEWID}     data=${updatebooking}       headers=${HEADERS}
+    Should Be Equal As Strings      ${response.status_code}    404

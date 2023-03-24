@@ -35,7 +35,7 @@ Create Booking
     ...                  Content-Type=${CONTENT_TYPE}
     ...                  User-Agent=RobotFramework
     Create Session      Create Booking     ${BASE_URL}     verify=True
-    ${response}=        Post Request    Create Booking     uri=${BOOKING}   data=${newbooking}  headers=${HEADERS}
+    ${response}=        POST REQUEST    Create BOOKING     uri=${BOOKING}   data=${newbooking}  headers=${HEADERS}
     log to console    ${response.status_code}
     Should Be Equal      ${response.status_code}     ${200}
     log to console    ${response.content}
